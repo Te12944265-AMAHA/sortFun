@@ -133,6 +133,32 @@ def test_merge_sort():
     print(array)
 
 
+# O(n^2)
+def bubble_sort(array, reverse=False, in_place=True):
+    if in_place:
+        if not reverse:
+            for i in range(0, len(array)):
+                for j in range(len(array)-1, i, -1):
+                    if array[j-1] > array[j]:
+                        swap_in_place(array, j, j-1)
+        else:
+            for i in range(0, len(array)):
+                for j in range(len(array)-1, i, -1):
+                    if array[j-1] < array[j]:
+                        swap_in_place(array, j, j-1)                   
+    else:
+        arr = copy.deepcopy(array)
+        merge_sort(arr, reverse, True)
+        return arr
+
+
+def test_bubble_sort():
+    array = create_object_array([6,8,1,4,7,2,4,5,9])
+    arr = bubble_sort(array, True, False)
+    print(arr)
+
+
 test_insertion_sort()
 test_selection_sort()
 test_merge_sort()
+test_bubble_sort()
